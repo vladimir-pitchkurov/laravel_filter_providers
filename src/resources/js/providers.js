@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('category_filter');
+    form.setAttribute('action', window.location.href);
     form.addEventListener('submit',function (ev){
         ev.preventDefault()
         const action = form.getAttribute('action');

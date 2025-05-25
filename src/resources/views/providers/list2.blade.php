@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-3">
             @if(!empty($selected_categories))
-                <a href="{{ route('providers.list.v1') }}" class="btn btn-secondary w-100 mt-2">Reset Filters</a>
+                <a href="{{ route('providers.list.v2') }}" class="btn btn-secondary w-100 mt-2">Reset Filters</a>
             @endif
             <form method="GET" action="{{ route('providers.list.v1') }}" id="category_filter">
                 <div class="card mb-4">
@@ -36,8 +36,9 @@
 
         <div class="col-md-9">
             <div class="row row-cols-1 g-4">
-                @foreach($providers as $provider)
-                    <div class="col">
+                @foreach($providers as $index => $provider)
+                    @cache('provider:'.$provider->id, 36000)
+                        <div class="col">
                         <a href="{{ route('providers.details', ['provider' => $provider->id]) }}"
                            class="text-decoration-none text-dark">
                             <div class="card provider-card h-100 shadow-sm d-flex flex-row-reverse align-items-center">
@@ -45,10 +46,12 @@
                                     @if($provider->logo_url)
                                         <img src="{{ $provider->logo_url }}" class="img-fluid rounded-end"
                                              alt="{{ $provider->name }}"
+                                             @if($index >= 30) loading="lazy" @endif
                                              style="width: 100%;height: 100%;object-fit: cover;border-radius: 6px;">
                                     @else
                                         <img src="https://placehold.co/600x400" class="img-fluid rounded-end"
                                              alt="No Image"
+                                             @if($index >= 30) loading="lazy" @endif
                                              style="width: 100%;height: 100%;object-fit: cover;border-radius: 6px;">
                                     @endif
                                 </div>
@@ -67,6 +70,7 @@
                             </div>
                         </a>
                     </div>
+                    @endcache
                 @endforeach
             </div>
         </div>

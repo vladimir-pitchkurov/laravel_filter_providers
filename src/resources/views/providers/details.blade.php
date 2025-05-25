@@ -37,7 +37,7 @@
             </div>
         @endif
 
-        @if(url()->hasPrevious())
+        @if(url()->previous() && url()->previous() !== url()->current())
             <a href="{{ url()->previous() }}" class="btn btn-secondary">
                 ← Back
             </a>
