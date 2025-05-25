@@ -14,8 +14,13 @@ class ServiceProviderController extends Controller
         $this->service = $service;
     }
 
-    public function prividersList(Request $request)
+    public function providersList(Request $request)
     {
         return $this->service->getServiceProviders($request);
+    }
+
+    public function providerDetails(Request $request, int $provider_id)
+    {
+        return $this->service->getServiceProviderDetails($request, $provider_id);
     }
 }
