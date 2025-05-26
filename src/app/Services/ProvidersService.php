@@ -6,6 +6,7 @@ use App\Contracts\ServiceProviderInt;
 use App\Models\Category;
 use App\Models\ServiceProvider;
 use App\Models\ServiceProviderCategory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ProvidersService implements ServiceProviderInt
@@ -65,6 +66,49 @@ class ProvidersService implements ServiceProviderInt
 
         return view('providers.list2', [
             'providers' => $providers,
+            'categories' => $all_categories,
+            'selected_categories' => $selected_categories,
+        ]);
+    }
+
+    public function providersListApi(Request $request): JsonResponse
+    {
+        $query = ServiceProvider::query();
+        $query->with(['categories']);
+        $query->orderBy('name');
+
+        $selected_categories = $request->query('categories', '');
+        if ($selected_categories) {
+            $selected_categories = explode(',', $selected_categories);
+        } else {
+            $selected_categories = [];
+        }
+
+        if (!empty($selected_categories)) {
+            $query->whereHas('categories', function ($q) use ($selected_categories) {
+                $q->whereIn('categories.id', $selected_categories);
+            });
+        }
+
+        $providers = $query->get();
+
+        return response()->json([
+            'providers' => $providers,
+        ]);
+    }
+
+    public function getServiceProvidersV3(Request $request)
+    {
+        $all_categories = $this->getAllCategories();
+
+        $selected_categories = $request->query('categories', '');
+        if ($selected_categories) {
+            $selected_categories = explode(',', $selected_categories);
+        } else {
+            $selected_categories = [];
+        }
+
+        return view('providers.list3', [
             'categories' => $all_categories,
             'selected_categories' => $selected_categories,
         ]);

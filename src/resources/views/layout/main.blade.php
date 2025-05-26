@@ -30,10 +30,6 @@
                     <a class="nav-link text-white {{ request()->routeIs('providers.list.v3') ? 'active' : '' }}"
                        href="{{ route('providers.list.v3') }}">optimisation v2</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('providers.list.v4') ? 'active' : '' }}"
-                       href="{{ route('providers.list.v4') }}">optimisation v3</a>
-                </li>
             </ul>
         </div>
     </div>
