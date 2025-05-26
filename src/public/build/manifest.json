@@ -1,0 +1,19 @@
+{
+  "resources/css/list.css": {
+    "file": "assets/list-BcW2eKzK.css",
+    "src": "resources/css/list.css",
+    "isEntry": true
+  },
+  "resources/js/list.js": {
+    "file": "assets/list-BJJ3RWSt.js",
+    "name": "list",
+    "src": "resources/js/list.js",
+    "isEntry": true
+  },
+  "resources/js/providers.js": {
+    "file": "assets/providers-0KzYgiuT.js",
+    "name": "providers",
+    "src": "resources/js/providers.js",
+    "isEntry": true
+  }
+}
