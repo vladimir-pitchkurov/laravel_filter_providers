@@ -57,3 +57,6 @@ services:
 networks:
   laravel:
     driver: bridge
+
+volumes:
+  mysql_data:
